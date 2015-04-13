@@ -1,0 +1,32 @@
+{
+  "name": "baleinajs",
+  "version": "0.0.1",
+  "main": "server.js",
+  "dependencies": {
+    "MD5": "~1.2.1",
+    "coffee-script": "~1.7.1",
+    "commander": "^2.2.0",
+    "compression": "^1.0.3",
+    "ejs": "^2.2.1",
+    "errorhandler": "^1.1.1",
+    "express": "~3.4.8",
+    "fs-extra": "^0.9.1",
+    "glob": "~3.2.8",
+    "log4js": "~0.6.10",
+    "methods": "^1.1.1",
+    "moment": "~2.5.1",
+    "node-uuid": "~1.4.1",
+    "sequelize": "~2.0.0-dev11",
+    "serve-favicon": "^2.0.1",
+    "underscore": "*",
+    "walkdo": "^0.9.5"
+  },
+  "bin": {
+    "bal": "./bin/cli"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "description": "baleinajs"
+}
