@@ -27,6 +27,7 @@
         "sequelize": "^2.0.0-rc7",
         "serve-favicon": "^2.2.0",
         "walkdo": "^0.9.6",
-        "underscore": "^1.7.0"
+        "underscore": "^1.7.0",
+        "coffee-script": "^1.7.1"
     }
 }
