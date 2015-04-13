@@ -26,6 +26,9 @@ var Controller = function(app, func, path, method) {
         }
     };
     this.renderRoute = function(req, res, next) {
+        if (!path) {
+            path = 'index';
+        }
         res.render(path + '.html')
     };
     this.mainRoute = func.call(this);
