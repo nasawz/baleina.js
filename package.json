@@ -1,6 +1,6 @@
 {
   "name": "baleina.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "kairos frontend team cv frame work",
   "main": "server.js",
   "bin": {
