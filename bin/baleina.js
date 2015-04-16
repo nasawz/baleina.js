@@ -39,11 +39,17 @@ var baleina = {
             }
         })
     },
-    createController: function(name) {
+    createController: function(name,xpath) {
         var cliPath = path.resolve('.');
         var content = fs.readFileSync(path.join(__dirname, "../templates/controller.coffee"));
         content = content.toString().replace(/\{\{name\}\}/g, name);
-        fs.writeFileSync(path.join(cliPath, "controllers", name + ".js"), content, 'utf-8');
+        fs.writeFileSync(path.join(cliPath, "controllers", xpath, name + ".coffee"), content, 'utf-8');
+    },
+    createView: function(name,xpath) {
+        var cliPath = path.resolve('.');
+        var content = fs.readFileSync(path.join(__dirname, "../templates/view.html"));
+        content = content.toString().replace(/\{\{name\}\}/g, name);
+        fs.writeFileSync(path.join(cliPath, "views", xpath, name + ".html"), content, 'utf-8');
     },
     createFunction: function() {
 

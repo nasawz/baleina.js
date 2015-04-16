@@ -23,10 +23,20 @@ program
 
 program
     .command('controller')
-    .option('-n, --name', 'Add controller')
+    .option('-n, --name', 'controller name')
+    .option('-p, --path', 'controller path')
     .description('create controller')
-    .action(function(name) {
-        updateCLI.createController(name)
+    .action(function(name,xpath) {
+        updateCLI.createController(name,xpath)
+    });
+
+program
+    .command('view')
+    .option('-n, --name', 'view name')
+    .option('-p, --path', 'view path')
+    .description('create view')
+    .action(function(name,xpath) {
+        updateCLI.createView(name,xpath)
     });
 
 program

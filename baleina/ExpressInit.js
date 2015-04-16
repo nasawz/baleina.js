@@ -53,11 +53,14 @@ module.exports = function (app) {
         level: log4js.levels.INFO
     }));
 
-    //cookie session postbody支持
-    //app.use(express.bodyParser());
 
-    app.use(express.urlencoded());
-    app.use(express.json());
+    app.use(express.bodyParser());
+
+    app.use(express.cookieParser());
+    app.use(express.cookieSession({
+        secret: config.session_secret
+    }));
+    app.use(express.methodOverride());
 
 
     app.use(express.cookieParser());
