@@ -43,12 +43,21 @@ var baleina = {
         var cliPath = path.resolve('.');
         var content = fs.readFileSync(path.join(__dirname, "../templates/controller.coffee"));
         content = content.toString().replace(/\{\{name\}\}/g, name);
+
+        var dirPath = path.join(cliPath, "views", xpath)
+        if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, 0775)
+
         fs.writeFileSync(path.join(cliPath, "controllers", xpath, name + ".coffee"), content, 'utf-8');
     },
     createView: function(name,xpath) {
         var cliPath = path.resolve('.');
         var content = fs.readFileSync(path.join(__dirname, "../templates/view.html"));
         content = content.toString().replace(/\{\{name\}\}/g, name);
+
+
+        var dirPath = path.join(cliPath, "views", xpath)
+        if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, 0775)
+
         fs.writeFileSync(path.join(cliPath, "views", xpath, name + ".html"), content, 'utf-8');
     },
     createFunction: function() {
