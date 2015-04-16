@@ -44,7 +44,7 @@ var baleina = {
         var content = fs.readFileSync(path.join(__dirname, "../templates/controller.coffee"));
         content = content.toString().replace(/\{\{name\}\}/g, name);
 
-        var dirPath = path.join(cliPath, "views", xpath)
+        var dirPath = path.join(cliPath, "controllers", xpath)
         if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, 0775)
 
         fs.writeFileSync(path.join(cliPath, "controllers", xpath, name + ".coffee"), content, 'utf-8');
