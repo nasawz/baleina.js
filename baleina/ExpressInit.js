@@ -55,20 +55,11 @@ module.exports = function (app) {
 
 
     app.use(express.bodyParser());
-
     app.use(express.cookieParser());
     app.use(express.cookieSession({
         secret: config.session_secret
     }));
     app.use(express.methodOverride());
-
-
-    app.use(express.cookieParser());
-    app.use(express.cookieSession({
-        secret: config.session_secret
-    }));
-    var methodOverride = require('method-override')
-    app.use(methodOverride('X-HTTP-Method-Override'))
 
     //rainbow配置
     rainbow.route(app, config.rainbow);
