@@ -1,6 +1,6 @@
 require('coffee-script/register')
-//引入express服务器
-var server = require('./index.js')
+
+var server = require('./index')
 require('http').createServer(server).listen(server.get('port'), function() {
-    console.log('Express server listening on port ' + server.get('port'));
+    console.log('server listening on port http://127.0.0.1:' + server.get('port'));
 });
