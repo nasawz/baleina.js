@@ -1,24 +1,19 @@
 #!/usr/bin/env node
+require('coffee-script/register')
+var program = require('commander');
+var libInfo = require('../package');
+var updateCLI = require('./baleina');
 
-var program = require('commander'),
-    updateCLI = require('./baleina.js'),
-    libInfo = require('../package');
 
 program
-    .version(libInfo.version)
+    .version(libInfo.version);
+
 
 program
     .command('create')
     .description('create a project')
     .action(function(options) {
         updateCLI.create(options)
-    });
-
-program
-    .command('update')
-    .description('update the project')
-    .action(function(options) {
-        updateCLI.update(options)
     });
 
 program
@@ -40,10 +35,19 @@ program
     });
 
 program
-    .command('automodel')
-    .description('create model config')
-    .action(function(options) {
-        updateCLI.createAutoModel()
+    .command('service')
+    .option('-n, --name', 'service name')
+    .description('create service')
+    .action(function(name,xpath) {
+        updateCLI.createService(name,xpath)
     });
 
-program.parse(process.argv); // 这行必须是结尾
+program
+    .command('filter')
+    .option('-n, --name', 'program name')
+    .description('create program')
+    .action(function(name,xpath) {
+        updateCLI.createFilter(name,xpath)
+    });
+
+program.parse(process.argv);
