@@ -10,5 +10,9 @@ module.exports = function base(app) {
     app.middleware('initial', loopback.compress());
 
     app.middleware('session', loopback.session({ saveUninitialized: true,
-        resave: true, secret: 'keyboard cat' }));
+        resave: true, secret: 'nasa' }));
+
+    app.middleware('parse', loopback.json());
+    app.middleware('parse', loopback.urlencoded({ extended: false }));
+    app.middleware('parse', loopback.cookieParser());
 };

@@ -12,7 +12,7 @@ tumo =
       'filters'
       'server'
       'services'
-      'tumo'
+      'baleina'
       'views'
       'config.coffee'
       'filters.config.coffee'
