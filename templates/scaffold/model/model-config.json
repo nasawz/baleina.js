@@ -4,19 +4,7 @@
       "../common/models"
     ]
   },
-  "user": {
-    "dataSource": "db",
-    "public": true
-  },
   "event": {
-    "dataSource": "db",
-    "public": true
-  },
-  "jump": {
-    "dataSource": "db",
-    "public": true
-  },
-  "checkin": {
     "dataSource": "db",
     "public": true
   }

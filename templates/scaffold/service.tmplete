@@ -4,12 +4,12 @@ module.exports =
 
   create{{modelClass}}: (obj,cb) ->
     {{modelClass}}.create obj,(err,data) ->
-      cb null,data
+      cb err,data
 
 
 
   get{{modelClass}}sByEventId:(eventId, page, pageSize, cb)->
-    Photo.find {
+    {{modelClass}}.find {
       where:
         eventId:eventId
         status:{
@@ -38,7 +38,7 @@ module.exports =
           neq:'delete'
         }
     },(err,data) ->
-      cb null,data
+      cb err,data
 
   update{{modelClass}}: (obj,cb) ->
     {{modelClass}}.findOne {
@@ -49,7 +49,7 @@ module.exports =
         }
     },(err,data) ->
       data.updateAttributes obj,(err,data)->
-        cb null,data
+        cb err,data
 
 
   delete{{modelClass}}ById: (id,cb) ->
@@ -63,4 +63,4 @@ module.exports =
       target = {}
       target.status = 'delete'
       data.updateAttributes target,(err,data)->
-        cb null,data
+        cb err,data

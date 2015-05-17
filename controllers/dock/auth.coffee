@@ -24,11 +24,11 @@ module.exports =
                 if _.findWhere(user.apps, {eventId:eventId})
                   req.session.user = user
                   req.session.save
-                  return res.json({code:200,msg:'',alert:'操作成功!',content:''})
+                  return res.redirect '/manage/'+eventId
                 else
                   return res.json({code:401,msg:'用户无限权限',alert:'操作失败!',content:''})
               else
                 req.session.user = user
                 req.session.save
-                return res.json({code:200,msg:'',alert:'操作成功!',content:''})
+                return res.redirect '/manage/'+eventId
 

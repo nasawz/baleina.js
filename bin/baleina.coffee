@@ -92,7 +92,8 @@ tumo =
 
   scaffoldService:(model) ->
     modelClass = model
-    modelInstance = model.toLowerCase()
+
+    modelInstance = model.substr(0,1).toLowerCase()+model.substr(1,model.length)
 
 
     cliPath = path.resolve('.')
