@@ -2,6 +2,8 @@ util = require('util')
 fse = require('fs-extra')
 path = require('path')
 shellby = require('shellby')
+_ = require('underscore')
+
 
 tumo =
   create: ->
@@ -87,6 +89,102 @@ tumo =
     file = path.join(cliPath, 'filters', name + '.coffee')
     fse.writeFileSync file, content, 'utf-8'
     console.log('act succ')
+
+  scaffoldService:(model) ->
+    modelClass = model
+    modelInstance = model.toLowerCase()
+
+
+    cliPath = path.resolve('.')
+    content = fse.readFileSync(path.join(__dirname, '../templates/scaffold/service.tmplete'))
+    content = content.toString().replace(/\{\{modelClass\}\}/g, modelClass)
+    content = content.toString().replace(/\{\{modelInstance\}\}/g, modelInstance)
+
+    dirPath = path.join(cliPath, 'services')
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'services', '_'+modelInstance+'.coffee')
+    fse.writeFileSync file, content, 'utf-8'
+    console.log modelClass,modelInstance
+    console.log('act succ')
+
+  scaffoldManage: ->
+    cliPath = path.resolve('.')
+    #复制素材文件
+    assets_folders = [
+      ['templates/scaffold/fileupload','assets/fileupload']
+      ['templates/scaffold/pages','assets/pages']
+      ['templates/scaffold/templete','assets/templete']
+      ['templates/favicon.ico','assets/favicon.ico']
+    ]
+    assets_folders.forEach (folder) ->
+      _path = path.join(__dirname, '..', folder[0])
+      targetPath = path.join(cliPath, folder[1])
+      if fse.existsSync(_path)
+        #copy整个目录过去
+        fse.copy _path, targetPath, (e) ->
+          if e
+            console.log 'copy file error:' + e.message
+          return
+      return
+    #复制service
+    services_folders = [
+      ['templates/scaffold/event.coffee','services/event.coffee']
+    ]
+    services_folders.forEach (folder) ->
+      _path = path.join(__dirname, '..', folder[0])
+      targetPath = path.join(cliPath, folder[1])
+      if fse.existsSync(_path)
+        #copy整个目录过去
+        fse.copy _path, targetPath, (e) ->
+          if e
+            console.log 'copy file error:' + e.message
+          return
+      return
+    #复制filter
+    filters_folders = [
+      ['templates/scaffold/chkEvent.coffee','filters/chkEvent.coffee']
+      ['templates/scaffold/chkPin.coffee','filters/chkPin.coffee']
+      ['templates/scaffold/filters.config.coffee','filters.config.coffee']
+    ]
+    filters_folders.forEach (folder) ->
+      _path = path.join(__dirname, '..', folder[0])
+      targetPath = path.join(cliPath, folder[1])
+      if fse.existsSync(_path)
+        #copy整个目录过去
+        fse.copy _path, targetPath, (e) ->
+          if e
+            console.log 'copy file error:' + e.message
+          return
+      return
+    #复制controller
+    controllers_folders = [
+      ['templates/scaffold/manage.coffee','controllers/manage/index.coffee']
+    ]
+    controllers_folders.forEach (folder) ->
+      _path = path.join(__dirname, '..', folder[0])
+      targetPath = path.join(cliPath, folder[1])
+      if fse.existsSync(_path)
+        #copy整个目录过去
+        fse.copy _path, targetPath, (e) ->
+          if e
+            console.log 'copy file error:' + e.message
+          return
+      return
+    #复制view
+    views_folders = [
+      ['templates/scaffold/manage','views/manage']
+    ]
+    views_folders.forEach (folder) ->
+      _path = path.join(__dirname, '..', folder[0])
+      targetPath = path.join(cliPath, folder[1])
+      if fse.existsSync(_path)
+        #copy整个目录过去
+        fse.copy _path, targetPath, (e) ->
+          if e
+            console.log 'copy file error:' + e.message
+          return
+      return
+    console.log 'auto manage complete'
 
 
 

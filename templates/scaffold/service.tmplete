@@ -1,0 +1,66 @@
+{{modelClass}} = require('../index.coffee').models.{{modelInstance}}
+
+module.exports =
+
+  create{{modelClass}}: (obj,cb) ->
+    {{modelClass}}.create obj,(err,data) ->
+      cb null,data
+
+
+
+  get{{modelClass}}sByEventId:(eventId, page, pageSize, cb)->
+    Photo.find {
+      where:
+        eventId:eventId
+        status:{
+          neq:'delete'
+        }
+      limit:pageSize
+      skip:page*pageSize
+      order:'created desc'
+    },(err,data)->
+      cb err,data
+
+  get{{modelClass}}sCountByEventId:(eventId, cb)->
+    where =
+      eventId:eventId
+      status:{
+        neq:'delete'
+      }
+    Photo.count where, (err, count)->
+      cb err,count
+
+  get{{modelClass}}ById: (id,cb) ->
+    {{modelClass}}.findOne {
+      where:
+        id:id
+        status:{
+          neq:'delete'
+        }
+    },(err,data) ->
+      cb null,data
+
+  update{{modelClass}}: (obj,cb) ->
+    {{modelClass}}.findOne {
+      where:
+        id: obj.id
+        status:{
+          neq:'delete'
+        }
+    },(err,data) ->
+      data.updateAttributes obj,(err,data)->
+        cb null,data
+
+
+  delete{{modelClass}}ById: (id,cb) ->
+    {{modelClass}}.findOne {
+      where:
+        id: id
+        status:{
+          neq:'delete'
+        }
+    },(err,data) ->
+      target = {}
+      target.status = 'delete'
+      data.updateAttributes target,(err,data)->
+        cb null,data

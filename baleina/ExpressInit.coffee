@@ -6,11 +6,12 @@ express = require('express')
 
 module.exports = (app) ->
   app.set 'port', config.port
-  app.set 'restApiRoot', config.restApiRoot
   #模板所在路径
   app.engine '.html', require('ejs').renderFile
   app.set 'view engine', 'html'
   app.use '/assets', express['static'](config.base_path + '/assets')
+  app.use('/pages', express['static'](config.base_path + '/assets/pages'));
+  app.use('/templete', express['static'](config.base_path + '/assets/templete'));
   #rainbow配置
   rainbow.route app, config.rainbow
   #404处理
