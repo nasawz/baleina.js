@@ -1,0 +1,32 @@
+{
+  "name": "event",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date",
+      "default":"now"
+    },
+    "status": {
+      "type": "string",
+      "description": "",
+      "default": "normal"
+    },
+    "run": {
+      "type": "boolean",
+      "description": "运行状态",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

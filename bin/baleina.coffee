@@ -114,7 +114,7 @@ tumo =
       ['templates/scaffold/fileupload','assets/fileupload']
       ['templates/scaffold/pages','assets/pages']
       ['templates/scaffold/templete','assets/templete']
-      ['templates/favicon.ico','assets/favicon.ico']
+      ['templates/scaffold/favicon.ico','assets/favicon.ico']
     ]
     assets_folders.forEach (folder) ->
       _path = path.join(__dirname, '..', folder[0])
@@ -126,6 +126,22 @@ tumo =
             console.log 'copy file error:' + e.message
           return
       return
+    #复制数据模型
+    model_folders = [
+      ['templates/scaffold/model/event.js','common/models/event.js']
+      ['templates/scaffold/model/event.json','common/models/event.json']
+      ['templates/scaffold/model/model-config.json','server/model-config.json']
+    ]
+    model_folders.forEach (folder) ->
+    _path = path.join(__dirname, '..', folder[0])
+    targetPath = path.join(cliPath, folder[1])
+    if fse.existsSync(_path)
+      #copy整个目录过去
+      fse.copy _path, targetPath, (e) ->
+        if e
+          console.log 'copy file error:' + e.message
+        return
+    return
     #复制service
     services_folders = [
       ['templates/scaffold/event.coffee','services/event.coffee']
