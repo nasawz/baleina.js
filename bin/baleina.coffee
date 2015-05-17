@@ -133,15 +133,15 @@ tumo =
       ['templates/scaffold/model/model-config.json','server/model-config.json']
     ]
     model_folders.forEach (folder) ->
-    _path = path.join(__dirname, '..', folder[0])
-    targetPath = path.join(cliPath, folder[1])
-    if fse.existsSync(_path)
-      #copy整个目录过去
-      fse.copy _path, targetPath, (e) ->
-        if e
-          console.log 'copy file error:' + e.message
-        return
-    return
+      _path = path.join(__dirname, '..', folder[0])
+      targetPath = path.join(cliPath, folder[1])
+      if fse.existsSync(_path)
+        #copy整个目录过去
+        fse.copy _path, targetPath, (e) ->
+          if e
+            console.log 'copy file error:' + e.message
+          return
+      return
     #复制service
     services_folders = [
       ['templates/scaffold/event.coffee','services/event.coffee']
