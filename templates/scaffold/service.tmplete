@@ -27,7 +27,7 @@ module.exports =
       status:{
         neq:'delete'
       }
-    Photo.count where, (err, count)->
+    {{modelClass}}.count where, (err, count)->
       cb err,count
 
   get{{modelClass}}ById: (id,cb) ->
