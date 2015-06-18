@@ -16,7 +16,7 @@
     },
     "created": {
       "type": "date",
-      "default":"now"
+      "defaultFn": "now"
     },
     "status": {
       "type": "string",

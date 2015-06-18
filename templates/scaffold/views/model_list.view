@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title><%= modelConfig.name %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="{{= pkg.description }}" name="description"/>
+    <meta content="{{= pkg.author }}" name="author"/>
+    {{- include ../inc/style.html }}
+</head>
+<body class="fixed-header {{= menupin }} ">
+
+{{- include ../inc/sidebar.html }}
+
+
+<div class="page-container">
+
+{{- include ../inc/header.html }}
+
+
+
+
+    <div class="page-content-wrapper">
+
+        <div class="content" id="content">
+
+            <div class="jumbotron" data-pages="parallax">
+                <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+                    <div class="inner">
+
+                        <ul class="breadcrumb">
+                            <li>
+                                <p><%= modelConfig.name %></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid container-fixed-lg">
+
+                <div class="panel-heading">
+                    <div class="panel-title">
+
+                    </div>
+                    <div class="pull-right">
+                        <div class="col-xs-12">
+                            <a href="../create/{{= event.id }}" class="btn btn-primary btn-cons"><i class="fa fa-plus"></i> 新建</a>
+                        </div>
+                    </div>
+                    <div class="export-options-container pull-right" style="display: none;">
+                        <div class="exportOptions">
+                            <div class="DTTT btn-group" style="width: 400px; padding-right: 32px; margin-right: -32px;">
+                                <span class="panel-title" style="float:left;margin-top: 10px;margin-right: 10px;">下载范围 :</span>
+                                <input type="text" class="form-control min" style="width:80px;float:left;">
+                                <span class="panel-title" style="float:left;margin-top: 10px;margin-left: 20px;">~</span>
+                                <input type="text" class="form-control max" style="width:80px;float:left;margin-left: 20px;">
+                                <span title="" style="float: right;" data-toggle="tooltip" class="btn btn-default tip m-b-5 m-r-5 export" type="button" data-original-title="导 出 "><i class="pg-grid"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <div class="dataTables_wrapper form-inline no-footer">
+                        <div class="table-responsive">
+                            <div class="dataTables_wrapper form-inline no-footer">
+                                <table class="table table-striped dataTable no-footer">
+                                    <thead>
+                                        <tr>
+
+<% for (propery in modelConfig.properties) { %>
+<% value = modelConfig.properties[propery] %>
+    <th><%= value.description?value.description:propery %></th>
+<% } %>
+
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        {{- include ../inc/footer.html }}
+
+
+    </div>
+
+</div>
+
+
+
+
+{{- include ../inc/script.html }}
+
+
+
+</body>
+</html>
+

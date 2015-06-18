@@ -67,4 +67,12 @@ program
         updateCLI.scaffoldManage()
     });
 
+program
+    .command('auto:model')
+    .option('-m, --model', 'model name')
+    .description('create controller and view to manage')
+    .action(function(model) {
+        updateCLI.scaffoldModel(model)
+    });
+
 program.parse(process.argv);

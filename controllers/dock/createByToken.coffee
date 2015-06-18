@@ -3,6 +3,7 @@
 OAUTH2 = require('bal-oauth');
 oauth2 = new OAUTH2('','',config.auth_base_url)
 func_event = loadService('event');
+func_eventExt = loadService('eventExt');
 
 module.exports =
   '/':
@@ -24,5 +25,6 @@ module.exports =
               obj.userId = user.id
               obj.userId = userId if userId
               func_event.createEvent obj, (err, event) ->
-                return res.json({code:200,msg:'',alert:'操作成功!',content:event})
+                func_eventExt.createEventExt {id:event.id}, (err, ext)->
+                  return res.json({code:200,msg:'',alert:'操作成功!',content:event})
 

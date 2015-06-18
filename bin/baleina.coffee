@@ -3,7 +3,9 @@ fse = require('fs-extra')
 path = require('path')
 shellby = require('shellby')
 _ = require('underscore')
-
+ejs = require('ejs')
+#ejs.open = '{{'
+#ejs.close = '}}'
 
 tumo =
   create: ->
@@ -131,6 +133,7 @@ tumo =
     model_folders = [
       ['templates/scaffold/model/event.js','common/models/event.js']
       ['templates/scaffold/model/event.json','common/models/event.json']
+      ['templates/scaffold/model/event-ext.json','common/models/event-ext.json']
       ['templates/scaffold/model/model-config.json','server/model-config.json']
     ]
     model_folders.forEach (folder) ->
@@ -146,6 +149,7 @@ tumo =
     #复制service
     services_folders = [
       ['templates/scaffold/event.coffee','services/event.coffee']
+      ['templates/scaffold/eventExt.coffee','services/eventExt.coffee']
     ]
     services_folders.forEach (folder) ->
       _path = path.join(__dirname, '..', folder[0])
@@ -203,6 +207,37 @@ tumo =
       return
     console.log 'auto manage complete'
 
+
+
+  scaffoldModel:(model) ->
+    cliPath = path.resolve('.')
+    modelConfig = require(path.join(cliPath, 'common/models', model + '.json'))
+#    this.scaffoldModel_model_create_view(modelConfig)
+    this.scaffoldModel_model_list_view(modelConfig)
+    console.log('act succ')
+
+  scaffoldModel_model_create_view:(modelConfig)->
+    cliPath = path.resolve('.')
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_create.view')).toString()
+    content = ejs.render template, modelConfig:modelConfig
+    content = content.toString().replace(/\{\{/g, '<%')
+    content = content.toString().replace(/\}\}/g, '%>')
+    dirPath = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'_create.html')
+    fse.writeFileSync file, content, 'utf-8'
+
+  scaffoldModel_model_list_view:(modelConfig)->
+    cliPath = path.resolve('.')
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_list.view')).toString()
+    content = ejs.render template, modelConfig:modelConfig
+    content = content.toString().replace(/\{\{/g, '<%')
+    content = content.toString().replace(/\}\}/g, '%>')
+    console.log content
+    dirPath = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'_index.html')
+    fse.writeFileSync file, content, 'utf-8'
 
 
 module.exports = tumo
