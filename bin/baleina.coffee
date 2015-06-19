@@ -212,8 +212,9 @@ tumo =
   scaffoldModel:(model) ->
     cliPath = path.resolve('.')
     modelConfig = require(path.join(cliPath, 'common/models', model + '.json'))
+    this.scaffoldModel_model_list_controllerr(modelConfig)
 #    this.scaffoldModel_model_create_view(modelConfig)
-    this.scaffoldModel_model_list_view(modelConfig)
+#    this.scaffoldModel_model_list_view(modelConfig)
     console.log('act succ')
 
   scaffoldSidebar:() ->
@@ -228,7 +229,6 @@ tumo =
     content = ejs.render template, modelConfig:modelConfig
     content = content.toString().replace(/\{\{/g, '<%')
     content = content.toString().replace(/\}\}/g, '%>')
-#    console.log content
     dirPath = path.join(cliPath, 'views/manage','inc')
     fse.ensureDirSync dirPath
     file = path.join(cliPath, 'views/manage','inc','_sidebar.html')
@@ -255,6 +255,18 @@ tumo =
     fse.ensureDirSync dirPath
     file = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'_index.html')
     fse.writeFileSync file, content, 'utf-8'
+
+
+  scaffoldModel_model_list_controllerr:(modelConfig)->
+    cliPath = path.resolve('.')
+
+#    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_list.controller')).toString()
+#    content = ejs.render template, modelConfig:modelConfig
+#    console.log content.toString()
+#    dirPath = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
+#    fse.ensureDirSync dirPath
+#    file = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'_index.html')
+#    fse.writeFileSync file, content, 'utf-8'
 
 
 module.exports = tumo
