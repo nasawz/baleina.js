@@ -111,6 +111,7 @@
                 obj.<%= propery %> = $('.input_<%= propery %>').val();
             <% } %>
         <% } %>
+        obj.id = $('.input_id').val();
 
         $.ajax({
             type:'post',

@@ -72,17 +72,55 @@
                                     <thead>
                                         <tr>
 
-<% for (propery in modelConfig.properties) { %>
-<% value = modelConfig.properties[propery] %>
-    <th><%= value.description?value.description:propery %></th>
+<% for (porperty in modelConfig.properties) { %>
+<% value = modelConfig.properties[porperty] %>
+    <th><%= value.description?value.description:porperty %></th>
 <% } %>
 
                                             <th>操作</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                    {{ data.forEach(function(obj){ }}
+                                    <tr class="odd gradeX">
+<% for (porperty in modelConfig.properties) { %>
+<% value = modelConfig.properties[porperty] %>
+    <td>{{= obj.<%= porperty %> }}</td>
+<% } %>
+                                        <td class="center">
+                                            <div class="btn-group">
+                                                <a class="btn btn-xs btn-success" href="./create/{{= event.id}}?id={{= obj.id }}"><i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a class="btn btn-xs btn-danger btn_delete" data-id="{{= obj.id }}"><i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {{ }) }}
+                                    </tbody>
+
+
+
                                 </table>
                             </div>
                         </div>
+
+
+                        <div class="row">
+                            <div>
+                                <div class="dataTables_info">
+                                    {{ var toNum =  page*10+10; }}
+                                    {{ if (toNum > count){toNum = count;} }}
+                                    显示 <b>{{= page*10+1 }} ~ {{= toNum }}</b>, 数据总数: <b>{{= count }}</b>
+                                </div>
+                                <div class="dataTables_paginate paging_bootstrap pagination">
+                                    <ul id="Pagination">
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -104,6 +142,60 @@
 {{- include ../inc/script.html }}
 
 
+<script>
+
+    var flag = false;
+    function pageselectCallback(page_index){
+        if(flag){
+            location.href = '?page='+(parseInt(page_index));
+        }
+        flag = true;
+    }
+    function getOptions(){
+        var opt = {callback: pageselectCallback};
+        opt['items_per_page']=10;
+        opt['num_display_entries']=10;
+        opt['num_edge_entries']=0;
+        opt['prev_text']='<';
+        opt['next_text']='> ';
+        opt['current_page']={{= page }};
+        return opt;
+    }
+    var optInit = getOptions();
+    $("#Pagination").pagination({{= count }}, optInit);
+
+    $('.btn_delete').click(function (e) {
+        var id = $(e.target).data('id');
+        var obj = {};
+        obj.id = id;
+        swal({
+                    title: "你确认要删除吗？",
+                    text: "删除后不可恢复！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: '是的，删除它！',
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },
+                function(){
+                    $.ajax({
+                        url: './{{= event.id }}/delete',
+                        type: 'post',
+                        data: obj,
+                        success: function (data) {
+                            swal({
+                                        title:"已删除"
+                                    },
+                                    function(){
+                                        window.location.reload();
+                                    }
+                            );
+                        }
+                    })
+                });
+    })
+</script>
 
 </body>
 </html>

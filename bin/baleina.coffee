@@ -233,7 +233,6 @@ tumo =
     content = ejs.render template, modelConfig:modelConfig
     content = content.toString().replace(/\{\{/g, '<%')
     content = content.toString().replace(/\}\}/g, '%>')
-    console.log content
     dirPath = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
     fse.ensureDirSync dirPath
     file = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'_index.html')

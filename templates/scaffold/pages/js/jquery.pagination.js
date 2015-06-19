@@ -13,7 +13,7 @@ jQuery.fn.pagination = function(maxentries, opts){
 		num_display_entries:10,
 		current_page:0,
 		num_edge_entries:0,
-		link_to:"#",
+		link_to:"javascript:;",
 		prev_text:"Prev",
 		next_text:"Next",
 		ellipse_text:"...",
@@ -83,9 +83,9 @@ jQuery.fn.pagination = function(maxentries, opts){
 				}
 				else
 				{
-					var lnk = jQuery("<li><a class=''>"+(appendopts.text)+"</a></li>")
+					var lnk = jQuery("<li><a class='' href='javascript:;'>"+(appendopts.text)+"</a></li>")
 						.bind("click", getClickHandler(page_id))
-                        .attr('href', 'javascript:;');
+                        //.attr('href', 'javascript:;');
 //						.attr('href', opts.link_to.replace(/__id__/,page_id));
 						
 						
