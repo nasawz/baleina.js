@@ -75,4 +75,11 @@ program
         updateCLI.scaffoldModel(model)
     });
 
+program
+    .command('auto:sidebar')
+    .description('create sidebar view to manage')
+    .action(function() {
+        updateCLI.scaffoldSidebar()
+    });
+
 program.parse(process.argv);

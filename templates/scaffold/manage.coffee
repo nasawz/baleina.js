@@ -3,4 +3,6 @@ module.exports =
   '/:eventId':
     get:->
       (req, res, next)->
-          res.render('manage/index')
+        res.locals.level1 = 'dashboard'
+        res.locals.level2 = ''
+        res.render('manage/index')

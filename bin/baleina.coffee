@@ -216,6 +216,24 @@ tumo =
     this.scaffoldModel_model_list_view(modelConfig)
     console.log('act succ')
 
+  scaffoldSidebar:() ->
+    cliPath = path.resolve('.')
+    modelConfig = require(path.join(cliPath, 'server', 'model-config.json'))
+    this.scaffoldSidebar_view(modelConfig)
+    console.log('act succ')
+
+  scaffoldSidebar_view:(modelConfig)->
+    cliPath = path.resolve('.')
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/sidebar.view')).toString()
+    content = ejs.render template, modelConfig:modelConfig
+    content = content.toString().replace(/\{\{/g, '<%')
+    content = content.toString().replace(/\}\}/g, '%>')
+#    console.log content
+    dirPath = path.join(cliPath, 'views/manage','inc')
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'views/manage','inc','_sidebar.html')
+    fse.writeFileSync file, content, 'utf-8'
+
   scaffoldModel_model_create_view:(modelConfig)->
     cliPath = path.resolve('.')
     template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_create.view')).toString()
