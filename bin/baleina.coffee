@@ -228,6 +228,13 @@ baleina =
     this.scaffoldSidebar_view(modelConfig)
     console.log('act succ')
 
+  scaffoldSetting:() ->
+    cliPath = path.resolve('.')
+    modelConfig = require(path.join(cliPath, 'common/models', 'event-ext.json'))
+    this.scaffold_setting_view(modelConfig)
+    this.scaffold_setting_controllerr(modelConfig)
+    console.log('act succ')
+
   scaffoldSidebar_view:(modelConfig)->
     cliPath = path.resolve('.')
     template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/sidebar.view')).toString()
@@ -238,6 +245,27 @@ baleina =
     fse.ensureDirSync dirPath
     file = path.join(cliPath, 'views/manage','inc','_sidebar.html')
     fse.writeFileSync file, content, 'utf-8'
+
+  scaffold_setting_view:(modelConfig)->
+    cliPath = path.resolve('.')
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/setting.view')).toString()
+    content = ejs.render template, modelConfig:modelConfig
+    content = content.toString().replace(/\{\{/g, '<%')
+    content = content.toString().replace(/\}\}/g, '%>')
+    dirPath = path.join(cliPath, 'views/manage','setting')
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'views/manage','setting','_index.html')
+    fse.writeFileSync file, content, 'utf-8'
+
+  scaffold_setting_controllerr:(modelConfig)->
+    cliPath = path.resolve('.')
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/setting.controller')).toString()
+    content = ejs.render template, modelConfig:modelConfig
+    dirPath = path.join(cliPath, 'controllers/manage','setting')
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'controllers/manage','setting','index._coffee')
+    fse.writeFileSync file, content, 'utf-8'
+
 
   scaffoldModel_model_create_view:(modelConfig)->
     cliPath = path.resolve('.')

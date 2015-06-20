@@ -12,7 +12,7 @@ module.exports =
         pageSize = 10
         ep = EventProxy.create 'data','count', (data,count) ->
           res.render('manage/<%= model_ab %>/index',{data:data,count:count,page:page})
-        func_upyunFile.get<%= model_AB %>sCountByEventId req.params.eventId, (err,count)->
+        func_<%= model_aB %>.get<%= model_AB %>sCountByEventId req.params.eventId, (err,count)->
           if err
             ep.emit('count', 0)
           else

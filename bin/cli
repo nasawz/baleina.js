@@ -82,4 +82,11 @@ program
         updateCLI.scaffoldSidebar()
     });
 
+program
+    .command('auto:setting')
+    .description('create setting view to manage')
+    .action(function() {
+        updateCLI.scaffoldSetting()
+    });
+
 program.parse(process.argv);

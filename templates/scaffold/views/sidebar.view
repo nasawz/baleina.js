@@ -38,11 +38,11 @@
                 <ul class="sub-menu">
                     <li class="{{ if(level2 == '<%= mname %>_list'){ }} active {{ } }}">
                         <a href="/manage/<%= mname %>/{{= event.id }}"><span class="title"><%= value.description?value.description+"列表":"List" %></span></a>
-                        <span class="icon-thumbnail"><i class="fs-14 fa fa-cloud"></i></span>
+                        <span class="icon-thumbnail">列</span>
                     </li>
                     <li class="{{ if(level2 == '<%= mname %>_create'){ }} active {{ } }}">
-                        <a href="/manage/upyunfile/create/{{= event.id }}"><span class="title"><%= value.description?value.description+"创建":"Create" %></span></a>
-                        <span class="icon-thumbnail"><i class="fs-14 fa fa-cloud"></i></span>
+                        <a href="/manage/<%= mname %>/create/{{= event.id }}"><span class="title"><%= value.description?value.description+"创建":"Create" %></span></a>
+                        <span class="icon-thumbnail">创</span>
                     </li>
                 </ul>
             </li>
