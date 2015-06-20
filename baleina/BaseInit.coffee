@@ -1,4 +1,4 @@
-config = require('./../config')
+global.config = require('./../config')
 path = require('path')
 
 global.loadService = (functionName) ->

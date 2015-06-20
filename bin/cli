@@ -38,16 +38,55 @@ program
     .command('service')
     .option('-n, --name', 'service name')
     .description('create service')
-    .action(function(name,xpath) {
-        updateCLI.createService(name,xpath)
+    .action(function(name) {
+        updateCLI.createService(name)
     });
 
 program
     .command('filter')
     .option('-n, --name', 'program name')
     .description('create program')
-    .action(function(name,xpath) {
-        updateCLI.createFilter(name,xpath)
+    .action(function(name) {
+        updateCLI.createFilter(name)
+    });
+
+//auto
+
+program
+    .command('auto:service')
+    .option('-m, --model', 'model name')
+    .description('create auto service')
+    .action(function(model) {
+        updateCLI.scaffoldService(model)
+    });
+
+program
+    .command('auto:manage')
+    .description('create auto manage')
+    .action(function() {
+        updateCLI.scaffoldManage()
+    });
+
+program
+    .command('auto:model')
+    .option('-m, --model', 'model name')
+    .description('create controller and view to manage')
+    .action(function(model) {
+        updateCLI.scaffoldModel(model)
+    });
+
+program
+    .command('auto:sidebar')
+    .description('create sidebar view to manage')
+    .action(function() {
+        updateCLI.scaffoldSidebar()
+    });
+
+program
+    .command('auto:setting')
+    .description('create setting view to manage')
+    .action(function() {
+        updateCLI.scaffoldSetting()
     });
 
 program.parse(process.argv);

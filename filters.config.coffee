@@ -1,4 +1,4 @@
 module.exports =
-  '/dog*':
-    get: [ 'chkDog' ]
-    post: [ 'chkDog' ]
+  '/event/.*':
+    get: ['checkEvent','checkStatus']
+    post: ['checkEvent','checkStatus']
