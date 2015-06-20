@@ -7,7 +7,7 @@ ejs = require('ejs')
 #ejs.open = '{{'
 #ejs.close = '}}'
 
-tumo =
+baleina =
   create: ->
     cliPath = path.resolve('.')
     folders = [
@@ -94,10 +94,7 @@ tumo =
 
   scaffoldService:(model) ->
     modelClass = model
-
     modelInstance = model.substr(0,1).toLowerCase()+model.substr(1,model.length)
-
-
     cliPath = path.resolve('.')
     content = fse.readFileSync(path.join(__dirname, '../templates/scaffold/service.tmplete'))
     content = content.toString().replace(/\{\{modelClass\}\}/g, modelClass)
@@ -107,7 +104,6 @@ tumo =
     fse.ensureDirSync dirPath
     file = path.join(cliPath, 'services', '_'+modelInstance+'.coffee')
     fse.writeFileSync file, content, 'utf-8'
-    console.log modelClass,modelInstance
     console.log('act succ')
 
   scaffoldManage: ->
@@ -212,6 +208,14 @@ tumo =
   scaffoldModel:(model) ->
     cliPath = path.resolve('.')
     modelConfig = require(path.join(cliPath, 'common/models', model + '.json'))
+
+    model_ab = modelConfig.name.toLowerCase().replace(/-/g, '')
+    model_arr = modelConfig.name.toLowerCase().split('-')
+    model_aB = model_ab
+    model_aB = model_arr[0]+model_arr[1].substr(0,1).toLocaleUpperCase()+model_arr[1].substr(1,model_arr[1].length) if model_arr.length > 1
+    model_AB = model_aB.substr(0,1).toLocaleUpperCase()+model_aB.substr(1,model_aB.length)
+
+    this.scaffoldService(model_AB)
     this.scaffoldModel_model_create_controllerr(modelConfig)
     this.scaffoldModel_model_list_controllerr(modelConfig)
     this.scaffoldModel_model_create_view(modelConfig)
@@ -289,4 +293,4 @@ tumo =
     fse.writeFileSync file, content, 'utf-8'
 
 
-module.exports = tumo
+module.exports = baleina
