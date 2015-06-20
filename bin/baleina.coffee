@@ -212,9 +212,10 @@ tumo =
   scaffoldModel:(model) ->
     cliPath = path.resolve('.')
     modelConfig = require(path.join(cliPath, 'common/models', model + '.json'))
+    this.scaffoldModel_model_create_controllerr(modelConfig)
     this.scaffoldModel_model_list_controllerr(modelConfig)
-#    this.scaffoldModel_model_create_view(modelConfig)
-#    this.scaffoldModel_model_list_view(modelConfig)
+    this.scaffoldModel_model_create_view(modelConfig)
+    this.scaffoldModel_model_list_view(modelConfig)
     console.log('act succ')
 
   scaffoldSidebar:() ->
@@ -259,14 +260,33 @@ tumo =
 
   scaffoldModel_model_list_controllerr:(modelConfig)->
     cliPath = path.resolve('.')
+    model_ab = modelConfig.name.toLowerCase().replace(/-/g, '')
+    model_arr = modelConfig.name.toLowerCase().split('-')
+    model_aB = model_ab
+    model_aB = model_arr[0]+model_arr[1].substr(0,1).toLocaleUpperCase()+model_arr[1].substr(1,model_arr[1].length) if model_arr.length > 1
+    model_AB = model_aB.substr(0,1).toLocaleUpperCase()+model_aB.substr(1,model_aB.length)
 
-#    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_list.controller')).toString()
-#    content = ejs.render template, modelConfig:modelConfig
-#    console.log content.toString()
-#    dirPath = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
-#    fse.ensureDirSync dirPath
-#    file = path.join(cliPath, 'views/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'_index.html')
-#    fse.writeFileSync file, content, 'utf-8'
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_list.controller')).toString()
+    content = ejs.render template, modelConfig:modelConfig,model_ab:model_ab,model_aB:model_aB,model_AB:model_AB
+    dirPath = path.join(cliPath, 'controllers/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'controllers/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'index._coffee')
+    fse.writeFileSync file, content, 'utf-8'
+
+  scaffoldModel_model_create_controllerr:(modelConfig)->
+    cliPath = path.resolve('.')
+    model_ab = modelConfig.name.toLowerCase().replace(/-/g, '')
+    model_arr = modelConfig.name.toLowerCase().split('-')
+    model_aB = model_ab
+    model_aB = model_arr[0]+model_arr[1].substr(0,1).toLocaleUpperCase()+model_arr[1].substr(1,model_arr[1].length) if model_arr.length > 1
+    model_AB = model_aB.substr(0,1).toLocaleUpperCase()+model_aB.substr(1,model_aB.length)
+
+    template = fse.readFileSync(path.join(__dirname, '../templates/scaffold/views/model_create.controller')).toString()
+    content = ejs.render template, modelConfig:modelConfig,model_ab:model_ab,model_aB:model_aB,model_AB:model_AB
+    dirPath = path.join(cliPath, 'controllers/manage',modelConfig.name.toLowerCase().replace(/-/g, ''))
+    fse.ensureDirSync dirPath
+    file = path.join(cliPath, 'controllers/manage',modelConfig.name.toLowerCase().replace(/-/g, ''),'create._coffee')
+    fse.writeFileSync file, content, 'utf-8'
 
 
 module.exports = tumo
