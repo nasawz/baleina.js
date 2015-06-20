@@ -26,6 +26,12 @@
                 <span class="icon-thumbnail"><i class="fs-14 fa fa-dashboard"></i></span>
             </li>
 
+
+            <li class="{{ if(level1 == 'setting'){ }} active {{ } }} ">
+                <a href="/manage/setting/{{= event.id }}"><span class="title">系统设置</span></a>
+                <span class="icon-thumbnail"><i class="pg-settings"></i></span>
+            </li>
+
 <% for (porperty in modelConfig) { %>
 <% value = modelConfig[porperty] %>
     <% if (porperty!='_meta') {%>
@@ -33,7 +39,7 @@
         <% if (mname!='event' && mname!='eventext') {%>
             <li class="{{ if(level1 == '<%= mname %>'){ }} open active {{ } }}">
                 <a href="javascript:;"><span class="title"><%= value.description?value.description+"管理":mname %></span>
-                    <span class="arrow"></span></a>
+                    <span class="arrow {{ if(level1 == '<%= mname %>'){ }} open {{ } }}"></span></a>
                 <span class="icon-thumbnail"><i class="fs-14 fa fa-cubes"></i></span>
                 <ul class="sub-menu">
                     <li class="{{ if(level2 == '<%= mname %>_list'){ }} active {{ } }}">
