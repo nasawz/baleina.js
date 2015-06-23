@@ -1,6 +1,7 @@
 func_event = loadService('event');
 pkg = require('../package.json')
 func_eventExt = loadService('eventExt');
+EventProxy = require('eventproxy');
 
 module.exports = (req, res, next) ->
   res.locals.event = {id:'0'}
