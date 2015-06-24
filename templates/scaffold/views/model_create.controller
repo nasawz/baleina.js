@@ -23,6 +23,7 @@ module.exports =
               return res.json(code:500,msg:err,alert:'操作失败',content:'')
             return res.json(code:200,msg:'',alert:'操作成功',content:data)
         else
+          delete obj.id
           func_<%= model_aB %>.create<%= model_AB %> obj, (err, data)->
             if err
               return res.json(code:500,msg:err,alert:'操作失败',content:'')
