@@ -129,6 +129,7 @@ baleina =
     model_folders = [
       ['templates/scaffold/model/event.js','common/models/event.js']
       ['templates/scaffold/model/event.json','common/models/event.json']
+      ['templates/scaffold/model/event-ext.js','common/models/event-ext.js']
       ['templates/scaffold/model/event-ext.json','common/models/event-ext.json']
       ['templates/scaffold/model/model-config.json','server/model-config.json']
     ]
