@@ -4,7 +4,8 @@ module.exports =
 
   createEventExt:(obj, cb)->
     EventExt.findOne {
-      id:obj.id
+      where:
+        id:obj.id
     },(err,data)->
       if data
         cb null,data
@@ -14,13 +15,15 @@ module.exports =
 
   updateEventExt:(obj, cb)->
     EventExt.findOne {
-      id:obj.id
+      where:
+        id:obj.id
     },(err,ext)->
       ext.updateAttributes obj, (err,data)->
         cb null,data
 
   getEventExtById:(id, cb)->
     EventExt.findOne {
-      id:id
+      where:
+        id:id
     },(err,data)->
       cb null,data
