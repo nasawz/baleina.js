@@ -1,6 +1,6 @@
 {
   "name": "baleinaApp",
-  "version": "1.3.0",
+  "version": "1.3.3",
   "description": "baleina app",
   "main": "server.js",
   "repository": {},

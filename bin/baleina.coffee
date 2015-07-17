@@ -95,10 +95,13 @@ baleina =
   scaffoldService:(model) ->
     modelClass = model
     modelInstance = model.substr(0,1).toLowerCase()+model.substr(1,model.length)
+    console.log 'modelInstance',modelInstance
     cliPath = path.resolve('.')
-    content = fse.readFileSync(path.join(__dirname, '../templates/scaffold/service.tmplete'))
-    content = content.toString().replace(/\{\{modelClass\}\}/g, modelClass)
+    content = fse.readFileSync(path.join(__dirname, '../templates/scaffold/service.templete'))
+
+
     content = content.toString().replace(/\{\{modelInstance\}\}/g, modelInstance)
+    content = content.toString().replace(/\{\{modelClass\}\}/g, modelClass)
 
     dirPath = path.join(cliPath, 'services')
     fse.ensureDirSync dirPath
@@ -215,6 +218,10 @@ baleina =
     model_aB = model_ab
     model_aB = model_arr[0]+model_arr[1].substr(0,1).toLocaleUpperCase()+model_arr[1].substr(1,model_arr[1].length) if model_arr.length > 1
     model_AB = model_aB.substr(0,1).toLocaleUpperCase()+model_aB.substr(1,model_aB.length)
+
+
+    console.log model_ab,model_aB,model_AB
+
 
     this.scaffoldService(model_AB)
     this.scaffoldModel_model_create_controllerr(modelConfig)
